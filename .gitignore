@@ -1,0 +1,17 @@
+*vscode*
+
+## java 
+*.iml
+*.idea
+*out
+
+## c++
+*cmake*
+*CMake*
+
+## c#
+*.sln*
+*bin
+*obj
+*Prop*
+*.csproj
