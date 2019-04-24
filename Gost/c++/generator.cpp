@@ -29,6 +29,9 @@ void generate_matrix(ofstream *file) {
     int* row = new int[16]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     for (int i = 0; i < 8; ++i) {
         shuffle(row);
+        for(int i =0;i<16;++i)
+            cout<<row[i]<<" ";
+        cout << endl;
         for (int j = 0; j < 16; ++j) {
             int m =  (row[j] << 4 * i);
             file->write(reinterpret_cast<const char *>(&m), 4);

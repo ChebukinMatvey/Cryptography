@@ -12,14 +12,11 @@ import java.util.Random;
 
 public class Generator {
 
-
     public static void main(String[] args) throws IOException {
         int[][] matrix = generate_matrix();
         int[] keys = generate_keys();
         File file = new File("./info");
-
         LittleEndianOutputStream out = new LittleEndianOutputStream(new FileOutputStream(file));
-
         for (int key : keys)
             out.write(key);
         for (int i =0; i < 8; ++i)

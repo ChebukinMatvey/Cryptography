@@ -39,3 +39,9 @@ cin >> ROUNDS_COUNT;   // parameter for encryption/decryption
 - [x] C++
 - [x] C#
 - [x] Python
+
+### Blowfish
+- [x] Java
+- [x] C++
+- [X] C#
+- [ ] Python
