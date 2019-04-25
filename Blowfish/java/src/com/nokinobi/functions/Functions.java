@@ -35,14 +35,8 @@ public class Functions {
         Tuple block = new Tuple();
         for(int i=0,k_i=0,m_j=0,m_i=0;i<521;++i){
             ProcessBlock(block, k, matrix);
-            if(i<9){
-                writer.write(block.le);
-                writer.write(block.re);
-            }
-            else{
-                writer.write(block.le);
-                writer.write(block.re);
-            }
+            writer.write(block.le);
+            writer.write(block.re);
             if(k_i < 16){
                 block.le = k[k_i];
                 block.re = k[++k_i];

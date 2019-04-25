@@ -16,3 +16,7 @@
 *obj
 *Prop*
 *.csproj
+
+
+# python 
+__*

@@ -14,8 +14,8 @@ public class Main {
     public static final String DECRYPTED_FILE ="./decrypted";
 
     public static void main(String[] args) throws IOException {
-//        Functions.GenerateMainInformation();
-//        Encrypt(MAIN_INFORMATION_FILE,THE_GOAL_FILE,ENCRYPTED_FILE);
+        Functions.GenerateMainInformation();
+        Encrypt(MAIN_INFORMATION_FILE,THE_GOAL_FILE,ENCRYPTED_FILE);
         Decrypt(ENCRYPTED_FILE,DECRYPTED_FILE);
     }
 }

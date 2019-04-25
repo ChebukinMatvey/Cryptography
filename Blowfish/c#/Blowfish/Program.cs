@@ -15,7 +15,7 @@ namespace Blowfish
         
         public static void Main(string[] args)
         {
-//            Generate(MAIN_INFORMATION_FILE);
+            Generate(MAIN_INFORMATION_FILE);
             Encrypt(THE_GOAL_FILE,MAIN_INFORMATION_FILE,ENCRYPTION_FILE);
             Decrypt(ENCRYPTION_FILE,DECRYPTION_FILE);
         }

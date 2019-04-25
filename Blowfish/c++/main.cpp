@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 
     srand(time(NULL));
 //     generate_info();
-     encrypt();
+//     encrypt();
      decrypt();
     return 0;
 }

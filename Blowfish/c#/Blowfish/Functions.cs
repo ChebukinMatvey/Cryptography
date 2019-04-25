@@ -37,17 +37,8 @@ namespace  functions{
             for (int i = 0,matrix_i=0,matrix_j=0,k_index=0; i < 521; ++i)
             {
                 ProcessBlock(tuple,k,matrix,18);
-                if (i < 9)
-                {
-                    info.Write(BitConverter.GetBytes(tuple.le),0,4);
-                    info.Write(BitConverter.GetBytes(tuple.re),0,4);
-                }
-                else
-                {
-                    info.Write(BitConverter.GetBytes(tuple.le), 0, 4);
-                    info.Write(BitConverter.GetBytes(tuple.re), 0, 4);
-                }
-
+                info.Write(BitConverter.GetBytes(tuple.le),0,4);
+                info.Write(BitConverter.GetBytes(tuple.re),0,4);
                 if (k_index < 16)
                 {
                     tuple.le = k[k_index];

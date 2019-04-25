@@ -24,11 +24,7 @@ void generate_info()
     _tuple block;
     for(int i = 0,k_index=0,matrix_i=0,matrix_j=0 ; i<521; ++i){
         process_block(&block,k,matrix,18);
-        if(i < 9)
-            info.write(reinterpret_cast<char*>(&block),8);
-        else
-            info.write(reinterpret_cast<char*>(&block),8);
-        
+        info.write(reinterpret_cast<char*>(&block),8);
         if(k_index<16){ 
             block.le = k[k_index];
             block.re = k[++k_index];
