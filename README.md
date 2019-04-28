@@ -47,7 +47,7 @@ cin >> ROUNDS_COUNT;   // parameter for encryption/decryption
 - [x] Python
 
 ### DES
-- [ ] Java
+- [x] Java
 - [x] C++
 - [ ] C#
 - [ ] Python
