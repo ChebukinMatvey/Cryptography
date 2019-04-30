@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using static Des.Functions;
 
 
@@ -25,9 +26,15 @@ namespace Des
 
             int fileSize = (int)goal.BaseStream.Length;
             output.Write(fileSize);
-            for(int i = 0; i<fileSize; ++i){
+            
+            Console.WriteLine("Count of rounds[1:16] = ");
+            int rounds = Convert.ToInt32(Console.ReadLine());
+            Array.Resize(ref keys,rounds);
+            
+            for(int i = 0; i< Math.Ceiling( fileSize/8.0); ++i){
                 ulong pi = readBlock(goal);
                 ulong ci = processBlock(pi, ip, reversedIp, matrix, keys);
+                Console.WriteLine($"{pi}  {ci}");
                 output.Write(ci);
             }
             info.Close();

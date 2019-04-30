@@ -49,6 +49,7 @@ public class Encryptor {
         for(int i=0;i<Math.ceil(fileSize/8.0);++i){
             pi = goal.readLong();
             long ci = processBlock(pi,ip,reversedIp,matrix,keys);
+            System.out.println(pi+" "+ci);
             out.write(ci);
         }
         goal.close();

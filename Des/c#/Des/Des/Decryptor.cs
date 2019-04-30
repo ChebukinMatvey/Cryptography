@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using static Des.Functions;
 
@@ -18,7 +19,12 @@ namespace Des
             byte[,] matrix = readMatrix(input);
 
             int fileSize = input.ReadInt32();
-
+            
+            
+            Console.WriteLine("Count of rounds[1:16] = ");
+            int rounds = Convert.ToInt32(Console.ReadLine());
+            Array.Resize(ref keys,rounds);
+            
             keys = keys.Reverse().ToArray();
 
             for(int i=0; i< fileSize/8; ++i){

@@ -18,8 +18,8 @@ namespace Des
         static void Main(string[] args)
         {
             //generateMainInformation(MAIN_INFORMATION_FILE);
-            //Encryptor.encrypt(THE_GOAL_FILE,MAIN_INFORMATION_FILE,ENCRYPTED_FILE);
-            Decryptor.decrypt(ENCRYPTED_FILE,DECRYPTED_FILE);
+            Encryptor.encrypt(THE_GOAL_FILE,MAIN_INFORMATION_FILE,ENCRYPTED_FILE);
+//            Decryptor.decrypt(ENCRYPTED_FILE,DECRYPTED_FILE);
         }
     }
 

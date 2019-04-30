@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from functions import *
 import struct 
 import os 
@@ -31,3 +33,8 @@ def encrypt(goal_file,main_information_file,encrypted_file):
         p = int.from_bytes(goal.read(8),"little")
         c = process_block(p,ip,reversed_ip,matrix,keys)
         out.write(struct.pack("<Q",c))
+
+
+
+if __name__ == "__main__":
+    encrypt("./text","./info","./encrypted")

@@ -36,7 +36,6 @@ public class Functions {
         int t = block.le;
         block.le = block.re;
         block.re = t;
-
         return selectPermutation(block.toLong(),reversedIp,64);
     }
 
@@ -109,6 +108,7 @@ public class Functions {
                 currentBit >>>= (ip[i] - i);
             destination |= currentBit;
         }
+//        System.out.println(destination);
         return  destination;
     }
 

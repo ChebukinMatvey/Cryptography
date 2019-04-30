@@ -36,7 +36,7 @@ int fs(int re,byte**matrix,int64 key){
     int64 pe = select_permutation(E,re,48);
     pe ^=key;
     for(int c =0,i,b,j;c<8;++c) {
-        b = (pe & ((int64)0b111111 << c*6)) >> c*6;
+        b = (pe>>c*6)&0b111111;
         i = (b&0b1) | ((b&0b100000)>>4);
         j = (b&0b011110)>>1;
         res |= ((int)matrix[i][j]) << c*4 ;

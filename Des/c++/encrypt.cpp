@@ -28,6 +28,7 @@ void encrypt(string* goal_file,string*info_file,string*encrypted_file){
     for(int i=0;i<file_size/8.0;++i){
         goal.read(reinterpret_cast<char*>(&b), sizeof(b));
         ci = process_block(b,ip,r_ip,matrix,keys,rounds);
+        cout<<b<<"  "<<ci<<endl;
         out.write(reinterpret_cast<char*>(&ci), sizeof(ci));
     }
 
