@@ -27,7 +27,6 @@ int64 process_block(int64 pi,byte*ip,byte*r_ip,byte**matrix,int64*keys,int round
     b->le=b->re;
     b->re=temp;
 
-    pi = *(reinterpret_cast<int64*>(b));
     return select_permutation(r_ip,pi,64);
 }
 
@@ -46,13 +45,13 @@ int fs(int re,byte**matrix,int64 key){
 
 byte* read_ip(ifstream*in){
     byte*ip=new byte[64];
-    in->read(reinterpret_cast<char*>(ip), sizeof(byte)*64);
+    in->read(reinterpret_cast<char*>(ip), 1*64);
     return ip;
 }
 
 int64* read_keys(ifstream*in){
     int64* keys=new int64[16];
-    in->read(reinterpret_cast<char*>(keys), sizeof(keys)*16);
+    in->read(reinterpret_cast<char*>(keys), 8*16);
     return keys;
 }
 
@@ -61,7 +60,7 @@ byte** read_matrix(ifstream*in){
     for(int i=0;i<4;++i)
         matrix[i]=new byte[16];
     for (int i = 0; i < 4; ++i)
-        in->read(reinterpret_cast<char*>(matrix[i]), sizeof(byte)*16);
+        in->read(reinterpret_cast<char*>(matrix[i]), 1*16);
     return matrix;
 }
 
@@ -103,11 +102,11 @@ void generate(string* file) {
     srand(time(NULL));
 
     byte* ip64 = get_shuffled_sequence(64);
-    out.write(reinterpret_cast<const char *>(ip64), sizeof(byte) * 64);
+    out.write(reinterpret_cast<const char *>(ip64),64);
 
     byte* ip48 = get_shuffled_sequence(56);
     byte* ip56 = get_shuffled_sequence(64);
-    int64 k = ((long)rand() << 32) | rand();
+    int64 k = ((int64)rand()) << 32 | rand();
 
     int64 temp = select_permutation(ip56,k,56);
     int c = temp>>28;
@@ -117,11 +116,11 @@ void generate(string* file) {
         d = rol28(d, rol_count[i]);
         temp = ((int64)c<<28) | d;
         int64 key = select_permutation(ip48,temp,48);
-        out.write(reinterpret_cast<const char *>(&key), sizeof(int64));
+        out.write(reinterpret_cast<const char *>(&key), 8);
     }
     for (int i = 0; i < 4; ++i) {
         byte* sequence = get_shuffled_sequence(16);
-        out.write(reinterpret_cast<const char *>(sequence), sizeof(byte) * 16);
+        out.write(reinterpret_cast<const char *>(sequence),16);
         delete [] sequence;
     }
     out.close();

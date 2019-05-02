@@ -1,16 +1,20 @@
 #include "header.h"
 
-extern int ROUNDS_COUNT;
 using namespace std;
 
 void process_block(block *b, int **matrix, vector<int> *keysequence) {
-    for (int i =0 ; i < ROUNDS_COUNT ; i++) {
-        round(b, matrix, keysequence->at(i));
+	int length = keysequence->size();
+    for (int i =0 ; i < length; i++) {
+        round(b, matrix, (*keysequence)[i]);
     }
+
+	uint tmp = b->le;
+	b->le = b->re;
+	b->re = tmp;
 }
 
-void round(block *b, int **matrix, uint key) {
-//    cout<<"Round with key"<<key<<endl;
+void round(block *b, int **matrix, int key) {
+    //cout<<"Round with key"<<key<<endl;
     int se = fs(b->re, key, matrix);
     uint temp = (b->le) ^se;
     b->le = b->re;
@@ -52,6 +56,7 @@ vector<int>* get_keysecuence(int* keys,int count){
         if(keysequence->size() == count)
             return keysequence;
     }
+	 return NULL;
 }
 
 

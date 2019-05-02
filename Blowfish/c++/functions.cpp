@@ -1,6 +1,4 @@
 #include"functions.h"
-extern char* KEYS_FILE;
-extern char* MATRIX_FILE;
 
 void generate_info()
 {
@@ -21,17 +19,17 @@ void generate_info()
     }
 
     ofstream info(MAIN_INFORMATION_FILE,ios_base::binary);
-    _tuple block;
+    block b;
     for(int i = 0,k_index=0,matrix_i=0,matrix_j=0 ; i<521; ++i){
-        process_block(&block,k,matrix,18);
-        info.write(reinterpret_cast<char*>(&block),8);
+        process_block(&b,k,matrix,18);
+        info.write(reinterpret_cast<char*>(&b),8);
         if(k_index<16){ 
-            block.le = k[k_index];
-            block.re = k[++k_index];
+            b.le = k[k_index];
+            b.re = k[++k_index];
         }
         else {
-            block.le = matrix[matrix_i][matrix_j];
-            block.re = matrix[matrix_i][++matrix_j];
+            b.le = matrix[matrix_i][matrix_j];
+            b.re = matrix[matrix_i][++matrix_j];
             if(matrix_j == 255){
                 matrix_i++;
                 matrix_j = 0;
@@ -52,7 +50,7 @@ int* generate_random_sequence(int N)
 {
     int *sequence= new int[N];
     for(int i = 0; i < N ; ++i){
-        sequence[i] = rand();
+        sequence[i] = (int)rand() << 16 | rand();
     }
     return sequence;
 }
@@ -60,7 +58,6 @@ int* generate_random_sequence(int N)
 
 int* read_keys(ifstream* info)
 {
-    ifstream file(KEYS_FILE);
     int* keys = new int[18];
     for(int i = 0; i<18 ; ++i)
         info->read(reinterpret_cast<char*>(keys + i),4);
@@ -87,21 +84,21 @@ void reverse(int* arr,int len)
     }
 }
 
-void process_block(_tuple* block,int*keys,int**matrix,int rounds_count)
+void process_block(block* block,int*keys,int**matrix,int rounds_count)
 {
     for(int i = 0 ; i < rounds_count-2; ++i )
         round(block,keys[i],matrix);
     finish_swap(block,keys[rounds_count-1],keys[rounds_count-2]);
 }
 
-_tuple* read_block(std::ifstream* file)
+block* read_block(std::ifstream* file)
 {
-    _tuple* t = new _tuple();
+    block* t = new block();
     file->read(reinterpret_cast<char*>(t),8);
     return t;
 }
 
-void round(_tuple* block,int key,int**matrix)
+void round(block* block,int key,int**matrix)
 {
     int lek = block->le ^ key;
     block->le = fs(lek,matrix) ^ block->re;    
@@ -117,7 +114,7 @@ int fs(int lek,int**matrix)
     return ( ( s1+s2 ) ^ s3 ) + s4;
 }
 
-void finish_swap(_tuple* block,int key1,int key2)
+void finish_swap(block* block,int key1,int key2)
 {
     int temp = block->le;
     block->le = block->re ^ key1;

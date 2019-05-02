@@ -1,3 +1,6 @@
+#ifndef __HEADER__
+#define __HEADER__
+
 #include<fstream>
 #include<iostream>
 #include<time.h>
@@ -6,17 +9,19 @@
 #include <string>
 using namespace std;
 
-static const std::string THE_GOAL_FILE = "./text";
-static const std::string MAIN_INFORMATION_FILE= "./info";
-static const std::string ENCRYPTED_FILE = "./encrypted";
-static const std::string DECRYPTED_FILE = "./decrypted";
+static const string THE_GOAL_FILE = "./text";
+static const string MAIN_INFORMATION_FILE= "./info";
+static const string ENCRYPTED_FILE = "./encrypted";
+static const string DECRYPTED_FILE = "./decrypted";
 
 
-struct _tuple{
+typedef unsigned long ulong;
+
+struct block{
     int le;
     int re;
 
-    _tuple(){
+    block(){
         this->le = 0;
         this->re = 0;
     }
@@ -29,8 +34,10 @@ int* *read_matrix(ifstream*);
 
 void reverse(int*,int);
 
-void process_block(_tuple*,int*,int**,int);
-_tuple* read_block(ifstream*);
-void round(_tuple*,int,int**);
+void process_block(block*,int*,int**,int);
+block* read_block(ifstream*);
+void round(block*,int,int**);
 int fs(int,int**);
-void finish_swap(_tuple*,int,int);
+void finish_swap(block*,int,int);
+
+#endif 

@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <vector>
 #include <math.h>
+#include<time.h>
+#include<stdlib.h>
 
 using namespace std;
 
@@ -12,10 +14,10 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 
 // global constants
-const string THE_GOAL_FILE="../text";
-const string MAIN_INFORMATION_FILE="../info";
-const string ENCRYPTED_FILE="../encrypted";
-const string DECRYPTED_FILE="../decrypted";
+const string THE_GOAL_FILE="./text";
+const string MAIN_INFORMATION_FILE="./info";
+const string ENCRYPTED_FILE="./encrypted";
+const string DECRYPTED_FILE="./decrypted";
 
 
 struct block{
@@ -38,7 +40,7 @@ int **read_matrix(ifstream* info);
 int *read_keys(ifstream* info);
 
 vector<int>* get_keysecuence(int*,int);
-void round(block*,int**,uint);
+void round(block*,int**,int);
 int fs(uint,uint,int**);
 int rol(uint,uint);
 

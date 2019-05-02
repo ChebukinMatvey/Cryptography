@@ -9,18 +9,16 @@
 
 using namespace std;
 
-typedef unsigned long int64;
+typedef unsigned long long int64;
 typedef unsigned char byte;
 
-typedef struct block{
+struct block{
     int re;
     int le;
 };
 
-
 void encrypt(string*,string*,string*);
 void decrypt(string*,string*);
-
 
 int64 process_block(int64 pi,byte*ip,byte*r_ip,byte**matrix,int64*keys,int count);
 int fs(int re,byte**matrix,int64 k);

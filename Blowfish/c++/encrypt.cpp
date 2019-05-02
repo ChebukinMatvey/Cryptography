@@ -25,7 +25,7 @@ void encrypt()
     cin>>rounds_count;
 
 
-    _tuple* block;
+    block* block;
     for(int i = 0; i < ceil(file_len/(double)8); ++i)
     {
         block = read_block(&file);

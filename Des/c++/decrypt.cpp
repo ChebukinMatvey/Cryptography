@@ -10,36 +10,27 @@ void decrypt(string*encrypted_file,string*decrypted_file){
     int64* keys = read_keys(&inp);
     byte** matrix = read_matrix(&inp);
 
-   int file_size;
-   inp.read(reinterpret_cast<char*>(&file_size), sizeof(file_size));
+	int file_size;
+	inp.read(reinterpret_cast<char*>(&file_size), 4);
 
-   reverse(keys,16);
+	reverse(keys,16);
 
-   cout<<"Count of rounds[1:16] = ";
-   int rounds=0;
-   cin>>rounds;
+	cout<<"Count of rounds[1:16] = ";
+	int rounds=0;
+	cin>>rounds;
 
-   int64 b=0,pi=0;
-   for (int i = 0; i < file_size/8; ++i) {
-       inp.read(reinterpret_cast<char*>(&b), sizeof(b));
-       pi = process_block(b,ip,r_ip,matrix,keys+(16-rounds),rounds);
-       out.write(reinterpret_cast<char*>(&pi), sizeof(pi));
-   }
-   int tail = (file_size+8)%8;
-   if (tail>0){
-       inp.read(reinterpret_cast<char*>(&b), sizeof(b));
-       pi = process_block(b,ip,r_ip,matrix,keys+(16-rounds),rounds);
-       for (int i = 0; i < tail; ++i) {
-           char c = pi>>i*8;
-           out.write(reinterpret_cast<char*>(&c), sizeof(c));
-       }
-   }
+	int64 b=0,pi=0;
+	for (int i = 0; i < ceil(file_size/8.0); ++i) {
+	    inp.read(reinterpret_cast<char*>(&b),8);
+	    pi = process_block(b,ip,r_ip,matrix,keys+(16-rounds),rounds);
+		out.write(reinterpret_cast<char*>(&pi), i*8 <=(file_size -8)? 8: (file_size+8)%8 );
+	}
 
-   inp.close();
-    out.close();
-    delete [] keys;
-    delete [] ip;
-    for (int i = 0; i < 4; ++i)
-        delete []matrix[i];
-    delete [] matrix;
+	inp.close();
+	out.close();
+	delete [] keys;
+	delete [] ip;
+	for (int i = 0; i < 4; ++i)
+	delete []matrix[i];
+	delete [] matrix;
 }

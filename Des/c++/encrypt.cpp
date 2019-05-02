@@ -26,10 +26,10 @@ void encrypt(string* goal_file,string*info_file,string*encrypted_file){
 
     int64 b=0,ci=0;
     for(int i=0;i<file_size/8.0;++i){
-        goal.read(reinterpret_cast<char*>(&b), sizeof(b));
+        goal.read(reinterpret_cast<char*>(&b), 8);
         ci = process_block(b,ip,r_ip,matrix,keys,rounds);
         cout<<b<<"  "<<ci<<endl;
-        out.write(reinterpret_cast<char*>(&ci), sizeof(ci));
+        out.write(reinterpret_cast<char*>(&ci),8);
     }
 
     info.close();
